@@ -79,7 +79,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
 static const char *termcmd[]  = { "st", NULL };
 /* Screenshot */
-static const char *screenshotcmd[] = { "sh", "-c", "scrot -s \"$HOME/Pictures/screenshots/%Y-%m-%d-%H%M%S.png\" -e 'xclip -selection clipboard -t image/png -i $f'", NULL };
+static const char *screenshotcmd[] = { "sh", "-c", "\"$HOME/.local/bin/screenshot\"", NULL };
 /* Adjust volumne */
 static const char *upvol[] = { "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && pkill -RTMIN+8 dwmblocks", NULL };
 static const char *downvol[] = { "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && pkill -RTMIN+8 dwmblocks", NULL };
@@ -87,7 +87,8 @@ static const char *mutevol[] = { "/bin/sh", "-c", "wpctl set-mute @DEFAULT_AUDIO
 static const char *mutemic[] = { "/usr/bin/wpctl", "set-mute", "@DEFAULT_AUDIO_SOURCE@", "toggle", NULL };
 /* Set wallpapers */
 static const char *wallcmd[] = { "sh", "-c", "\"$HOME/.local/bin/wall-selector\"", NULL };
-
+/* Power management*/
+static const char *powermenu[] = { "sh", "-c", "\"$HOME/.local/bin/powermenu\"", NULL };
 /*
  * Xresources preferences to load at startup
  */
@@ -153,6 +154,7 @@ static const Key keys[] = {
   { 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
   { MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
   { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallcmd } },
+  { MODKEY|ShiftMask,             XK_p,      spawn,          {.v = powermenu } },
 };
 
 /* button definitions */
